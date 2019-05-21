@@ -1,3 +1,6 @@
+/storage/cache/*
+/storage/sessions/*
+/storage/views/*
 /node_modules
 /public/hot
 /public/storage
