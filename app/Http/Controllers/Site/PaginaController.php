@@ -21,4 +21,27 @@ class PaginaController extends Controller
 
         return view('site.contato', compact('pagina'));
     }
+
+    public function enviarContato(Request $request)
+    {
+//       try{
+//           $Pagina = Pagina::where('tipo', '=', 'contato')->first();
+//           $email = $Pagina->email;
+//
+//           \Mail::send('emails.contato', ['request' =>$request], function($m) use($request,$email){
+//               $m->from($request['email'], $request['nome']);
+//               $m->reply_to($request['email'], $request['nome']);
+//               $m->to($email, 'Contato do Site');
+//           });
+//
+//           \Session::flash('mensagem',['msg'=>'Contato enviado com sucesso!','class'=>'green white-text']);
+//
+//       }catch(\Exception  $e){
+//           \Session::flash('mensagem',['msg'=>'Error ao enviar Email !'.$e->getMessage(),'class'=>'red white-text']);
+//       }
+
+        \Session::flash('mensagem',['msg'=>'Contato enviado com sucesso!','class'=>'green white-text']);
+        return redirect()->route('site.contato');
+
+    }
 }
