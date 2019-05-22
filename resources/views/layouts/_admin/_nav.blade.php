@@ -14,10 +14,11 @@
 
                     <ul id="dropdown1" class="dropdown-content">
                         <li><a href="#">{{ Auth::user()->name }}</a></li>
+                        <li><a href="{{ route('admin.cidades') }}">Cidades</a></li>
+                        <li><a href="{{ route('admin.tipos') }}">Tipos</a></li>
                         <li><a href="{{route('admin.usuarios')}}">Usuarios</a></li>
                         <li><a href="{{route('admin.paginas')}}">Paginas</a></li>
                     </ul>
-
                     <li><a href="{{ route('admin.logar.sair') }}">Sair</a></li>
                 @endif
             </ul>
@@ -30,6 +31,10 @@
                     <li><a href="{{ route('admin.login') }}">Login</a></li>
                 @else
                     <li><a href="#">{{ Auth::user()->name }}</a></li>
+                <li><a href="{{ route('admin.cidades') }}">Cidades</a></li>
+                    <li><a href="{{ route('admin.tipos') }}">Tipos</a></li>
+                    <li><a href="{{route('admin.usuarios')}}">Usuarios</a></li>
+                    <li><a href="{{route('admin.paginas')}}">Paginas</a></li>
                     <li><a href="{{ route('admin.logar.sair') }}">Sair</a></li>
                 @endif
 

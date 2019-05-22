@@ -21,13 +21,13 @@
                 <blockquote>
                     {{$pagina->descricao}}
                 </blockquote>
-                <form class="col s12">
+                <form class="col s12" action="{{ route('site.contato.enviar') }}" method="get">
                     <div class="input-field">
                         <input type="text" name="nome" class="validade">
                         <label>Nome</label>
                     </div>
                     <div class="input-field">
-                        <input type="text" name="nome" class="validade">
+                        <input type="text" name="email" class="validade">
                         <label>E-mail</label>
                     </div>
                     <div class="input-field">
