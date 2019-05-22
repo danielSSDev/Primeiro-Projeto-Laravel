@@ -10,11 +10,11 @@ class Imovel extends Model
 
     public function tipo()
     {
-        return$this->belongsTo('App\Tipo','tipo_id');
+        return $this->belongsTo('App\Tipo');
     }
 
     public function cidade()
     {
-        return$this->belongsTo('App\Cidade', 'cidade_id');
+        return $this->belongsTo('App\Cidade');
     }
 }

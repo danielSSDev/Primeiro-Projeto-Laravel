@@ -10,6 +10,6 @@ class Tipo extends Model
 
     public function imoveis()
     {
-        return $this->hasMany('App\Tipo', 'tipo_id');
+        return $this->hasMany('App\Imovel');
     }
 }

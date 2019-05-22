@@ -8,6 +8,6 @@ class Cidade extends Model
 {
     public function imoveis()
     {
-        return $this->hasMany('App\Imovel', 'cidade_id');
+        return $this->hasMany('App\Imovel');
     }
 }
