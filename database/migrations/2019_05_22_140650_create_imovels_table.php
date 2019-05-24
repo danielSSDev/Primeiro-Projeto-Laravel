@@ -13,13 +13,10 @@ class CreateImoveisTable extends Migration
      */
     public function up()
     {
-        Schema::create('imoveis', function (Blueprint $table) {
+        Schema::create('imovels', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('tipo_id')->unsigned();
-            $table->foreign('tipo_id')->references('id')->on('tipos');
             $table->integer('cidade_id')->unsigned();
-            $table->foreign('cidade_id')->references('id')->on('cidades');
-
             $table->string('titulo');
             $table->string('descricao');
             $table->string('imagem');
@@ -33,6 +30,9 @@ class CreateImoveisTable extends Migration
             $table->bigInteger('visualizacoes')->default(0);
             $table->enum('publicar',['sim','nao'])->default('nao');
 
+            $table->foreign('tipo_id')->references('id')->on('tipos');
+            $table->foreign('cidade_id')->references('id')->on('cidades');
+
             $table->timestamps();
         });
     }
@@ -44,6 +44,6 @@ class CreateImoveisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('imoveis');
+        Schema::dropIfExists('imovels');
     }
 }
