@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateImoveisTable extends Migration
+class CreateImovelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,8 +15,8 @@ class CreateImoveisTable extends Migration
     {
         Schema::create('imovels', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('tipo_id')->unsigned();
-            $table->integer('cidade_id')->unsigned();
+            $table->unsignedBigInteger('tipo_id');
+            $table->unsignedBigInteger('cidade_id');
             $table->string('titulo');
             $table->string('descricao');
             $table->string('imagem');
@@ -29,6 +29,7 @@ class CreateImoveisTable extends Migration
             $table->text('mapa')->nullable();
             $table->bigInteger('visualizacoes')->default(0);
             $table->enum('publicar',['sim','nao'])->default('nao');
+
 
             $table->foreign('tipo_id')->references('id')->on('tipos');
             $table->foreign('cidade_id')->references('id')->on('cidades');
