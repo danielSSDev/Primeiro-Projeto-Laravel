@@ -30,7 +30,7 @@
 </div>
 
 @else
-
+//so enra no else para adicionar varias imagens ao mesmo tempo
     <div class="row">
         <div class="file-field input-field col m12 s12">
             <div class="btn">
