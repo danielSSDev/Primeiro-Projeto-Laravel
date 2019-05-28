@@ -8,15 +8,16 @@
         </div>
         <div class="row section">
             <div class="col s12 m8">
+                @if($imovel->galeria()->count())
                 <div class="row">
                     <div class="slider">
                         <ul class="slides">
-                            @foreach($imovel->galeria as $imagem)
+                            @foreach($galeria as $imagem)
                             <li>
                                 <img src="{{asset($imagem->imagem)}}" alt="imagem">
-                                <div class="caption center-align">
-                                    <h3>Titulo da Imagem</h3>
-                                    <h5>Descriçao de Slide</h5>
+                                <div class="caption {{ $direcaoImagem[rand(0,2)] }}">
+                                    <h3>{{ $imagem->titulo }}</h3>
+                                    <h5>{{ $imagem->descricao }}</h5>
                                 </div>
                             </li>
                             @endforeach
@@ -27,6 +28,8 @@
                     <button onclick="sliderPrev()" class="btn blue">Anterior</button>
                     <button onclick="sliderNext()" class="btn blue">Proxima</button>
                 </div>
+                    @else
+                @endif
             </div>
             <div class="col s12 m4">
                 <h4>{{ $imovel->titulo }}</h4>
