@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Papel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
@@ -34,6 +35,14 @@ class UsuarioController extends Controller
 
     public function index()
     {
+//        if (auth()->user()->can('listar-usuarios', false))
+//        {
+//            dd('sim');
+//        }else
+//        {
+//            dd('nao');
+//        }
+
         $usuarios = User::all();
         return view('admin.usuarios.index',compact('usuarios'));
     }
@@ -92,4 +101,48 @@ class UsuarioController extends Controller
         return redirect()->route('admin.usuarios');
     }
 
+    public function papel($id)
+    {
+        $usuario = User::find($id);
+        $papel = Papel::all();
+
+        return view('admin.usuarios.papel', compact('usuario', 'papel'));
+    }
+
+    public function salvarPapel(Request $request, $id)
+    {
+        $usuario = User::find($id);
+        $dados = $request->all();
+        $papel = Papel::find($dados['papel_id']);
+        $usuario->adicionaPapel($papel);
+        return redirect()->back();
+    }
+
+    public function removerPapel($id, $papel_id)
+    {
+        $usuario = User::find($id);
+        $papel = Papel::find($papel_id);
+        $usuario->removePapel($papel);
+        return redirect()->back();
+
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

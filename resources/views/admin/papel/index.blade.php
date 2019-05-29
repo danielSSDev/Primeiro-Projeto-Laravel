@@ -36,16 +36,11 @@
                         <td>
                             @if($papel->nome != 'admin')
                                 <a class="btn orange" href="{{ route('admin.papel.editar', $papel->id) }}">Editar</a>
-                            @else
-                                <a class="btn orange disabled" >Editar</a>
-                            @endif
-
-                            @if($papel->nome != 'admin')
                                 <a class="btn red" href="javascript: if(confirm('Deletar esse Registro ?')){ window.location.href = '{{ route('admin.papel.deletar',$papel->id) }}' }">Deletar</a>
                             @else
+                                <a class="btn orange disabled" >Editar</a>
                                 <a class="btn red disabled" >Deletar</a>
                             @endif
-
                         </td>
                     </tr>
                 @endforeach
