@@ -77,7 +77,7 @@ class HomeController extends Controller
         $testeValor = [
             [['valor', '>=', '0']],
             [['valor', '<=', '500']],
-            [['valor', '>=', '500']], [['valor', '<=', '1000']],
+            [['valor', '>=', '500']],[['valor', '<=', '1000']],
             [['valor', '>=', '1000']],[['valor', '<=', '5000']],
             [['valor', '>=', '5000']],[['valor', '<=', '10000']],
             [['valor', '>=', '10000']],[['valor', '<=', '50000']],
