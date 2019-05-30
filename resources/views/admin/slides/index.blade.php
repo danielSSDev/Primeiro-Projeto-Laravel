@@ -36,7 +36,6 @@
                         <td>{{ $registro->descricao }}</td>
                         <td>{{ $registro->publicado }}</td>
                         <td><img width="100" src="{{ asset($registro->imagem) }}"></td>
-
                         <td>
                             <a class="btn orange" href="{{ route('admin.slides.editar', $registro->id) }}">Editar</a>
                             <a class="btn red" href="javascript: if(confirm('Deletar esse Registro ?')){ window.location.href = '{{ route('admin.slides.deletar',$registro->id) }}' }">Deletar</a>

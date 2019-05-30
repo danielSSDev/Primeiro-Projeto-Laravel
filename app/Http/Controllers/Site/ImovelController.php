@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Site;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Imovel;
+use Illuminate\Support\Str;
 
 class ImovelController extends Controller
 {
@@ -15,12 +16,13 @@ class ImovelController extends Controller
         $direcaoImagem = ['center-align', 'left-align', 'right-align'];
 
         $seo = [
-            'titulo'=>'Site Dinamico',
-            'descricao'=>'Descricao do Site dinamico',
-            'imagem'=>'imagem so Site',
-            'url'=>''
+            'titulo'=>$imovel->titulo,
+            'descricao'=>$imovel->descricao,
+            'imagem'=>asset($imovel->imagem),
+            'url'=>route('site.imovel',[$imovel->id, Str::slug($imovel->titulo, '_')])
+
         ];
 
-        return view('site.imovel', compact('imovel','galeria', 'direcaoImagem'));
+        return view('site.imovel', compact('imovel','galeria', 'direcaoImagem', 'seo'));
     }
 }
