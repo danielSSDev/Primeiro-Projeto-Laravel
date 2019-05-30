@@ -56,5 +56,51 @@ class PermissaoSeeds extends Seeder
                 'descricao'=>'Editar Usuarios'
             ]);
         }
+
+
+        if(!Permissao::where('nome', '=', 'papel_listar')->count())
+        {
+            Permissao::create([
+                'nome'=>'papel_listar',
+                'descricao'=>'Listar Papeis'
+            ]);
+        }else
+        {
+            $permissao = Permissao::where('nome', '=', 'papel_listar')->first();
+            $permissao->update([
+                'nome'=>'papel_listar',
+                'descricao'=>'Listar Papeis'
+            ]);
+        }
+
+        if(!Permissao::where('nome', '=', 'papel_adicionar')->count())
+        {
+            Permissao::create([
+                'nome'=>'papel_adicionar',
+                'descricao'=>'Adicionar Papeis'
+            ]);
+        }else
+        {
+            $permissao = Permissao::where('nome', '=', 'papel_adicionar')->first();
+            $permissao->update([
+                'nome'=>'papel_adicionar',
+                'descricao'=>'Adicionar Papeis'
+            ]);
+        }
+
+        if(!Permissao::where('nome', '=', 'papel_editar')->count())
+        {
+            Permissao::create([
+                'nome'=>'papel_editar',
+                'descricao'=>'Editar Papeis'
+            ]);
+        }else
+        {
+            $permissao = Permissao::where('nome', '=', 'papel_editar')->first();
+            $permissao->update([
+                'nome'=>'papel_editar',
+                'descricao'=>'Editar Papeis'
+            ]);
+        }
     }
 }

@@ -11,8 +11,16 @@ class ImovelController extends Controller
     public function index($id)
     {
         $imovel = Imovel::find($id);
-        $direcaoImagem = ['center-align', 'left-align', 'right-align'];
         $galeria = $imovel->galeria()->orderBy('ordem')->get();
+        $direcaoImagem = ['center-align', 'left-align', 'right-align'];
+
+        $seo = [
+            'titulo'=>'Site Dinamico',
+            'descricao'=>'Descricao do Site dinamico',
+            'imagem'=>'imagem so Site',
+            'url'=>''
+        ];
+
         return view('site.imovel', compact('imovel','galeria', 'direcaoImagem'));
     }
 }

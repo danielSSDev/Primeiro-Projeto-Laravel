@@ -35,25 +35,31 @@ class UsuarioController extends Controller
 
     public function index()
     {
-//        if (auth()->user()->can('listar-usuarios', false))
-//        {
-//            dd('sim');
-//        }else
-//        {
-//            dd('nao');
-//        }
-
-        $usuarios = User::all();
-        return view('admin.usuarios.index',compact('usuarios'));
+        if (auth()->user()->can('usuario_listar'))
+        {
+            $usuarios = User::all();
+            return view('admin.usuarios.index',compact('usuarios'));
+        }else
+        {
+            return redirect()->route('admin.principal');
+        }
     }
 
     public function adicionar()
     {
+        if (auth()->user()->can('usuario_adicionar')) {
+            return redirect()->route('admin.principal');
+        }
+
         return view('admin.usuarios.adicionar');
     }
 
     public function salvar(Request $request)
     {
+        if (auth()->user()->can('usuario_adicionar')) {
+            return redirect()->route('admin.principal');
+        }
+
         $dados = $request->all();
         $usuario = new User();
         $usuario->name = $dados['name'];
@@ -68,6 +74,10 @@ class UsuarioController extends Controller
 
     public function editar($id)
     {
+        if (auth()->user()->can('usuario_editar')) {
+            return redirect()->route('admin.principal');
+        }
+
         $usuario = User::find($id);
         return view('admin.usuarios.editar', compact('usuario'));
     }
@@ -75,6 +85,10 @@ class UsuarioController extends Controller
     public function atualizar(Request $request, $id)
     {
         try{
+            if (auth()->user()->can('usuario_atualizar')) {
+                return redirect()->route('admin.principal');
+            }
+
             $usuario =  User::find($id);
             $dados = $request->all();
             if(isset($dados['password']) && strlen($dados['password']) > 5){
@@ -96,6 +110,10 @@ class UsuarioController extends Controller
 
     public function deletar($id)
     {
+        if (auth()->user()->can('usuario_deletar')) {
+            return redirect()->route('admin.principal');
+        }
+
         User::find($id)->delete();
         \Session::flash('mensagem',['msg'=>'Registro Deletado com Sucesso!','class'=>'green white-text']);
         return redirect()->route('admin.usuarios');
