@@ -22,7 +22,7 @@
                     <label>Status</label>
                 </div>
 
-                <div class="input-field col s12 m2">
+                <div class="input-field col s12 m1">
                     <button class="btn deep-range darken-1 right">Filtrar</button>
                 </div>
             </div>

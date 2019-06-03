@@ -14,7 +14,8 @@ class ImovelController extends Controller
     public function index()
     {
         $registros = Imovel::all();
-        return view('admin.imoveis.index',compact('registros'));
+        $cidades = Cidade::all();
+        return view('admin.imoveis.index',compact('registros', 'cidades'));
     }
 
     public function adicionar()
@@ -133,5 +134,6 @@ class ImovelController extends Controller
         $registros = Imovel::where([$filtro])->get();
 
         return view('admin.imoveis.index', compact('busca','registros'));
+
     }
 }

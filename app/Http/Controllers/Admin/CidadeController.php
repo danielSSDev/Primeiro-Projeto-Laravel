@@ -31,6 +31,8 @@ class CidadeController extends Controller
 
         $cidade->save();
 
+        $cidade->saveCidade($dados);
+
         \Session::flash('mensagem', ['msg' => 'Registro criado com sucesso!', 'class' => 'green white-text']);
 
         return redirect()->route('admin.cidades');
@@ -85,5 +87,28 @@ class CidadeController extends Controller
 
         \Session::flash('mensagem',['msg'=>'Registro Deletado com Sucesso!','class'=>'green white-text']);
         return redirect()->route('admin.cidades');
+    }
+
+    public function buscar(Request $request)
+    {
+        $busca = $request->all();
+        $filtro = [];
+
+        if ($busca['nome'] != '')
+        {
+            $filtroNome = ['nome', 'like', '%'.$busca['nome'].'%'];
+            array_push($filtro,$filtroNome);
+        }
+
+        if($busca['estado'] != '')
+        {
+            $filtroEstado = ['estado', 'like', '%'.$busca['estado'].'%'];
+            array_push($filtro,$filtroEstado);
+        }
+
+        $registros = Cidade::where($filtro)->get();
+
+
+        return view('admin.cidades.index', compact('busca', 'registros'));
     }
 }

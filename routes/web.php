@@ -93,6 +93,8 @@ Route::group(['middleware'=>'auth'], function() {
 
     Route::get('/admin/cidades/deletar/{id}', ['as' => 'admin.cidades.deletar', 'uses' => 'Admin\CidadeController@deletar']);
 
+    Route::get('/admin/cidades/buscar', ['as' => 'admin.cidades.buscar', 'uses' => 'Admin\CidadeController@buscar']);
+
 
     Route::get('/admin/imoveis', ['as' => 'admin.imoveis', 'uses' => 'Admin\ImovelController@index']);
 

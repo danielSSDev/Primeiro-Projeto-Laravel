@@ -16,6 +16,24 @@
 
         </div>
 
+        <form action="{{ route('admin.cidades.buscar') }}">
+            <div class="row">
+                <div class="input-field col s12 m3">
+                    <input class="validate" type="text" name="nome" value="{{ isset($busca['nome']) ? $busca['nome'] : '' }}">
+                    <label>Tipo de Cidade</label>
+                </div>
+
+                <div class="input-field col s12 m3">
+                    <input class="validate" type="text" name="estado" value="{{ isset($busca['estado']) ? $busca['estado'] : '' }}">
+                    <label>Tipo de Estado</label>
+                </div>
+
+                <div class="input-field col s12 m1">
+                    <button class="btn deep-range darken-1 right">Filtrar</button>
+                </div>
+            </div>
+        </form>
+
         <div class="row">
             <table>
                 <thead>
