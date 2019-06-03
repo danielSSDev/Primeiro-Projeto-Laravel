@@ -13,8 +13,19 @@
                     </div>
                 </div>
             </nav>
-
         </div>
+
+        <form action="{{ route('admin.tipos.buscar') }}">
+        <div class="row">
+            <div class="input-field col s6 m4">
+                <input class="validate" type="text" name="titulo" value="{{ isset($busca['titulo']) ? $busca['titulo'] : '' }}">
+                <label>Tipo de Imovel</label>
+            </div>
+            <div class="input-field col s12 m2">
+                <button class="btn deep-range darken-1 right">Filtrar</button>
+            </div>
+        </div>
+        </form>
 
         <div class="row">
             <table>
@@ -26,7 +37,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($registros as $tipo)
+                @foreach($tipos as $tipo)
                     <tr>
                         <td>{{ $tipo->id }}</td>
                         <td>{{ $tipo->titulo }}</td>

@@ -117,4 +117,21 @@ class ImovelController extends Controller
         \Session::flash('mensagem',['msg'=>'Registro Deletado com Sucesso!','class'=>'green white-text']);
         return redirect()->route('admin.imoveis');
     }
+
+    public function buscar(Request $request)
+    {
+        $busca = $request->all();
+
+        if ($busca['status'] == '')
+        {
+            $filtro = ['id', '>', 0];
+        }else
+        {
+            $filtro = ['status',$busca['status']];
+        }
+
+        $registros = Imovel::where([$filtro])->get();
+
+        return view('admin.imoveis.index', compact('busca','registros'));
+    }
 }

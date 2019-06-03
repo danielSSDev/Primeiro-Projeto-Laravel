@@ -78,6 +78,8 @@ Route::group(['middleware'=>'auth'], function() {
 
     Route::get('/admin/tipos/deletar/{id}', ['as' => 'admin.tipos.deletar', 'uses' => 'Admin\TipoController@deletar']);
 
+    Route::get('/admin/tipos/buscar', ['as' => 'admin.tipos.buscar', 'uses' => 'Admin\TipoController@buscar']);
+
 
     Route::get('/admin/cidades', ['as' => 'admin.cidades', 'uses' => 'Admin\CidadeController@index']);
 
@@ -103,6 +105,8 @@ Route::group(['middleware'=>'auth'], function() {
     Route::put('/admin/imoveis/atualizar/{id}', ['as' => 'admin.imoveis.atualizar', 'uses' => 'Admin\ImovelController@atualizar']);
 
     Route::get('/admin/imoveis/deletar/{id}', ['as' => 'admin.imoveis.deletar', 'uses' => 'Admin\ImovelController@deletar']);
+
+    Route::get( '/admin/imoveis/buscar', ['as' => 'admin.imoveis.buscar', 'uses' => 'Admin\ImovelController@buscar']);
 
 
     Route::get('/admin/galerias/{id}', ['as' => 'admin.galerias', 'uses' => 'Admin\GaleriaController@index']);

@@ -11,8 +11,8 @@ class TipoController extends Controller
 {
     public function index()
     {
-        $registros = Tipo::all();
-        return view('admin.tipos.index',compact('registros'));
+        $tipos = Tipo::orderBy('id')->get();
+        return view('admin.tipos.index',compact(  'tipos'));
     }
 
     public function adicionar()
@@ -68,7 +68,7 @@ class TipoController extends Controller
 
             foreach ($imoveis as $imovel)
             {
-                $msg .= "id:".$imovel->id. " ";
+                $msg .= "id:".$imovel->id. " ". Tipo::find($id)->titulo. " ";
             }
             $msg .=  ")estão relacionados.";
 
@@ -80,6 +80,24 @@ class TipoController extends Controller
         Tipo::find($id)->delete();
         \Session::flash('mensagem',['msg'=>'Registro Deletado com Sucesso!','class'=>'green white-text']);
         return redirect()->route('admin.tipos');
+    }
+
+    public function buscar(Request $request)
+    {
+        $busca = $request->all();
+
+        if($busca['titulo'] == '')
+        {
+            $filtro =  ['id' , '>', 0];
+        }else{
+            $filtro = ['titulo', 'LIKE', '%'.$busca['titulo'].'%' ];
+        }
+
+
+        $tipos = Tipo::where([$filtro])->get();
+
+
+        return view('admin.tipos.index', compact('busca','tipos'));
     }
 }
 

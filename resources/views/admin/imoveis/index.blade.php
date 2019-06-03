@@ -13,8 +13,21 @@
                     </div>
                 </div>
             </nav>
-
         </div>
+
+        <form action="{{ route('admin.imoveis.buscar') }}">
+            <div class="row">
+                <div class="input-field col s6 m4">
+                    <input class="validate" type="text" name="status" value="{{ isset($busca['status']) ? $busca['status'] : ''}}">
+                    <label>Status</label>
+                </div>
+
+                <div class="input-field col s12 m2">
+                    <button class="btn deep-range darken-1 right">Filtrar</button>
+                </div>
+            </div>
+
+        </form>
 
         <div class="row">
             <table>
