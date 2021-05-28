@@ -18,7 +18,7 @@ class Imovel extends Model
         'endereco',
         'cep',
         'valor',
-        'dormitorios',
+        'dormitorios', 
         'detalhes',
         'mapa',
         'visualizacoes',
@@ -27,12 +27,12 @@ class Imovel extends Model
 
     public function tipo()
     {
-        return $this->belongsTo('App\Tipo');
+        return $this->belongsTo(Tipo::class);
     }
 
     public function cidade()
     {
-        return $this->belongsTo('App\Cidade');
+        return $this->belongsTo(Cidade::class);
     }
 
     public function galeria()

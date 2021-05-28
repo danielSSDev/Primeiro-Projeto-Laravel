@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Mail\OrderShipped;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Imovel;
 use App\Tipo;
 use App\Cidade;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
+use PhpParser\Node\Stmt\Return_;
 
 class ImovelController extends Controller
 {
@@ -66,6 +69,28 @@ class ImovelController extends Controller
         return view('admin.imoveis.editar', compact('registro','tipos', 'cidades'));
     }
 
+    public function email($id)
+    {
+        $registro = Imovel::find($id);
+        return view('admin.imoveis.email', compact('registro'));
+    }
+
+    public function enviarEmail(Request $request)
+    {
+        try{
+            $dados = $request->all();
+            $imovel = Imovel::find($dados['id']);
+
+            \Mail::to($dados['email'])->send(new OrderShipped($imovel));
+
+            \Session::flash('mensagem',['msg'=>'Email Enviado com sucesso!','class'=>'green white-text']);
+        }catch (\Exception $e)
+        {
+            \Session::flash('mensagem',['msg'=>'Erro ao Enviar Email!','class'=>'red white-text']);
+        }
+      return redirect()-> route('admin.imoveis');
+    }
+
     public function atualizar(Request $request, $id)
     {
         try{
@@ -122,18 +147,36 @@ class ImovelController extends Controller
     public function buscar(Request $request)
     {
         $busca = $request->all();
+        $cidades = Cidade::all();
+        $filtro = [];
 
-        if ($busca['status'] == '')
+        if ($busca['status'] != 'todos')
         {
-            $filtro = ['id', '>', 0];
-        }else
-        {
-            $filtro = ['status',$busca['status']];
+            $filtroStatus = ['status',$busca['status']];
+            array_push($filtro,$filtroStatus);
         }
 
-        $registros = Imovel::where([$filtro])->get();
+        if($busca['titulo'] != '')
+        {
+            $filtroTitulo = ['titulo', 'like', '%'.$busca['titulo'].'%'];
+            array_push($filtro,$filtroTitulo);
+        }
+   
 
-        return view('admin.imoveis.index', compact('busca','registros'));
+
+        if ($busca['cidade'] != 'todos')
+        {
+            $filtroCidade = ['id', $busca['cidade']];
+            array_push($filtro,$filtroCidade);
+        }
+
+        $registros = Imovel::select('imovels.*', 'cidades.nome')
+            ->join('cidades', 'imovels.cidade_id', '=', 'cidades.id' )
+            ->where($filtro)
+            ->get();
+       dd($registros);
+
+        return view('admin.imoveis.index', compact('busca','registros' ,'cidades'));
 
     }
 }

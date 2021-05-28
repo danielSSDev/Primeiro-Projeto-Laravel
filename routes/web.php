@@ -110,6 +110,10 @@ Route::group(['middleware'=>'auth'], function() {
 
     Route::get( '/admin/imoveis/buscar', ['as' => 'admin.imoveis.buscar', 'uses' => 'Admin\ImovelController@buscar']);
 
+    Route::get('/admin/imoveis/email/{id}', ['as' => 'admin.imoveis.email', 'uses' => 'Admin\ImovelController@email']);
+
+    Route::get('/admin/imoveis/enviar', ['as' => 'admin.imoveis.enviar', 'uses' => 'Admin\ImovelController@enviarEmail']);
+
 
     Route::get('/admin/galerias/{id}', ['as' => 'admin.galerias', 'uses' => 'Admin\GaleriaController@index']);
 

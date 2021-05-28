@@ -22,18 +22,21 @@ class CidadeController extends Controller
 
     public function salvar(Request $request)
     {
-        $dados = $request->all();
+        try{
+            $dados = $request->all();
 
-        $cidade = new Cidade();
-        $cidade->nome = $dados['nome'];
-        $cidade->estado = $dados['estado'];
-        $cidade->sigla_estado = $dados['sigla_estado'];
+            $cidade = new Cidade();
+            $cidade->nome = $dados['nome'];
+            $cidade->estado = $dados['estado'];
+            $cidade->sigla_estado = $dados['sigla_estado'];
 
-        $cidade->save();
+            $cidade->save();
 
-        $cidade->saveCidade($dados);
-
-        \Session::flash('mensagem', ['msg' => 'Registro criado com sucesso!', 'class' => 'green white-text']);
+            \Session::flash('mensagem', ['msg' => 'Registro criado com sucesso!', 'class' => 'green white-text']);
+        }catch(\Exception $e)
+        {
+            \Session::flash('mensagem', ['msg' => 'Erro ao Registrar Cidade', 'class' => 'red white-text']);
+        }
 
         return redirect()->route('admin.cidades');
     }
